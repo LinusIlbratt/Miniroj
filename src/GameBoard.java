@@ -18,6 +18,13 @@ public class GameBoard  {
         }
 
     }
+    public Cell getCell(int row, int col){
+        ArrayList<Cell> getRow = gameBoard.get(row);
+        Cell getCelInRow = getRow.get(col);
+        return getCelInRow;
+
+
+    }
 
     public int getBoardSize() {
         return boardSize;
