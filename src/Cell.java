@@ -19,5 +19,14 @@ public class Cell {
             return " ";
         }
     }
+
+    public void setHasBomb(boolean hasBomb) {
+        this.hasBomb = hasBomb;
+    }
+
+
+    public boolean getHasBomb() {
+        return hasBomb;
+    }
 }
 

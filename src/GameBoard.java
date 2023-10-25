@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.Random;
 
-public class GameBoard  {
+public class GameBoard {
+    Random bombsOnBoard = new Random();
     private int boardSize;
     private ArrayList<ArrayList<Cell>> gameBoard;
     private int bombCount;
 
-    public GameBoard(int boardSize,int bombCount) {
+    public GameBoard(int boardSize, int bombCount) {
         this.boardSize = boardSize;
         this.bombCount = bombCount;
         this.gameBoard = new ArrayList<>();
@@ -19,6 +21,21 @@ public class GameBoard  {
 
     }
 
+    public void generateBombs() {
+        int placedBombs = 0;
+        while (placedBombs < bombCount) {
+            int randomRow = bombsOnBoard.nextInt(boardSize);
+            int randomCol = bombsOnBoard.nextInt(boardSize);
+            if (!gameBoard.get(randomRow).get(randomCol).getHasBomb()) {
+                gameBoard.get(randomRow).get(randomCol).setHasBomb(true);
+
+
+                placedBombs++;
+            }
+
+        }
+
+    }
     public int getBoardSize() {
         return boardSize;
     }
@@ -35,7 +52,7 @@ public class GameBoard  {
         this.bombCount = bombCount;
     }
 
-    public void displayGameBoard(){
+    public void displayGameBoard() {
         // 1. Print column numbers
         System.out.print("    "); // Initial spacing
         for (int i = 1; i <= boardSize; i++) {
@@ -47,7 +64,7 @@ public class GameBoard  {
         System.out.println("  +-------------------------------+");
 
         // 3. Print rows
-        for (int row = 0; row < boardSize; row++){
+        for (int row = 0; row < boardSize; row++) {
             // Print row letter
             char rowLetter = (char) ('A' + row);
             System.out.print(rowLetter + " ");

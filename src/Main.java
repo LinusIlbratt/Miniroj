@@ -4,6 +4,7 @@ public class Main {
         GameBoard gameBoard = new GameBoard(8, 10);
         gameBoard.displayGameBoard();
 
+
     }
 
 }
