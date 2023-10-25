@@ -21,21 +21,26 @@ public class GameBoard {
 
     }
 
+    private void placeBomb(int row, int col) {
+        gameBoard.get(row).get(col).setHasBomb(true);
+    }
     public void generateBombs() {
+        Random rand = new Random();
         int placedBombs = 0;
         while (placedBombs < bombCount) {
-            int randomRow = bombsOnBoard.nextInt(boardSize);
-            int randomCol = bombsOnBoard.nextInt(boardSize);
-            if (!gameBoard.get(randomRow).get(randomCol).getHasBomb()) {
-                gameBoard.get(randomRow).get(randomCol).setHasBomb(true);
+            int randomRow = rand.nextInt(boardSize);
+            int randomCol = rand.nextInt(boardSize);
+            Cell selectedCell = gameBoard.get(randomRow).get(randomCol);
 
 
+            if (!selectedCell.getHasBomb()) {
+                placeBomb(randomRow, randomCol);
                 placedBombs++;
             }
-
         }
-
     }
+
+
     public int getBoardSize() {
         return boardSize;
     }

@@ -28,5 +28,7 @@ public class Cell {
     public boolean getHasBomb() {
         return hasBomb;
     }
+
+
 }
 
