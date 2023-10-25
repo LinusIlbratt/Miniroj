@@ -34,4 +34,37 @@ public class GameBoard  {
     public void setBombCount(int bombCount) {
         this.bombCount = bombCount;
     }
+
+    public void displayGameBoard(){
+        // 1. Print column numbers
+        System.out.print("    "); // Initial spacing
+        for (int i = 1; i <= boardSize; i++) {
+            System.out.print(i + "   ");
+        }
+        System.out.println();
+
+        // 2. Print the top edge frame of the board
+        System.out.println("  +-------------------------------+");
+
+        // 3. Print rows
+        for (int row = 0; row < boardSize; row++){
+            // Print row letter
+            char rowLetter = (char) ('A' + row);
+            System.out.print(rowLetter + " ");
+
+            // Print cells and dividers
+            for (int col = 0; col < boardSize; col++) {
+                System.out.print("| " + gameBoard.get(row).get(col).toString() + " ");
+            }
+            System.out.println("|");
+
+            // Print horizontal dividers
+            if (row < boardSize - 1) {
+                System.out.println("  +-------------------------------+");
+            }
+        }
+
+        // Print the bottom edge frame of the board
+        System.out.println("  +-------------------------------+");
+    }
 }
