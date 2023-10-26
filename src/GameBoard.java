@@ -20,6 +20,13 @@ public class GameBoard {
         }
 
     }
+    public Cell getCell(int row, int col){
+        ArrayList<Cell> getRow = gameBoard.get(row);
+        Cell getCelInRow = getRow.get(col);
+        return getCelInRow;
+
+
+    }
 
     private void placeBomb(int row, int col) {
         gameBoard.get(row).get(col).setHasBomb(true);
