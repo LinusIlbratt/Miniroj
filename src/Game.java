@@ -10,6 +10,11 @@ public class Game {
     public Game() {
         scan = new Scanner(System.in);
         gameBoard = new GameBoard(8, 10); // 8x8 with 10 bombs
+        Player player1 = new Player(scan.nextLine());
+        System.out.println("enter your name ");
+        String playerName = player1.getName();
+        gameBoard.displayGameBoard();
+        System.out.println("Chose your ");
 
 
     }
