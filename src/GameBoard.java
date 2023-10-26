@@ -65,39 +65,6 @@ public class GameBoard {
     public void setBombCount(int bombCount) {
         this.bombCount = bombCount;
     }
-    public void revealCell(int row, int col){
-        // Check if the index is valid
-        if (row < 0 || row >= boardSize || col < 0 || col >= boardSize){
-            return;
-        }
-
-        Cell cell = gameBoard.get(row).get(col);
-
-        // If the cell is already revealed then we return true
-        if (cell.isRevealed()) {
-            return;
-        }
-
-        // Reveal the cell
-        cell.setRevealed(true);
-
-        // If the cell has a bomb, then it's a loss
-        if (cell.hasBomb()){
-            // TODO This code will run if it has a bomb, implement a method for game over
-            System.out.println("Game over!");
-            return;
-        }
-
-        // If the cell doesn't have any neighboring bombs, reveal neighboring cells
-        if (cell.getNeighboringBombs() == 0) {
-            // 8 possible directions for neighboring cells
-            int[] directionRow = {-1 ,-1 ,-1 ,0, -1 ,1 , 0, 1};
-            int[] directionCol = {1 , -1 , 1 , 0 , 1 , 1, 0 ,-1};
-            for (int i = 0; i < 8; i++){
-                revealCell(row + directionRow[i], col + directionCol[i]);
-            }
-        }
-    }
 
     public void displayGameBoard() {
         // 1. Print column numbers
@@ -131,4 +98,7 @@ public class GameBoard {
         // Print the bottom edge frame of the board
         System.out.println("  +-------------------------------+");
     }
+
+
+
 }
