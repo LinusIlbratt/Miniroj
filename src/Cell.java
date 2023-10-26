@@ -1,6 +1,6 @@
 public class Cell {
-    private boolean hasBomb;
-    private boolean isRevealed;
+    protected boolean hasBomb;
+    protected boolean isRevealed;
     private int neighboringBombs;
 
     public Cell(){
@@ -20,6 +20,7 @@ public class Cell {
         }
     }
 
+
     public void setHasBomb(boolean hasBomb) {
         this.hasBomb = hasBomb;
     }
@@ -30,5 +31,22 @@ public class Cell {
     }
 
 
+    public boolean isRevealed() {
+        return isRevealed;
+
+    }
+
+    public void setRevealed(boolean revealed) {
+
+        isRevealed = revealed;
+    }
+
+    public boolean hasBomb() {
+        return hasBomb;
+    }
+
+    public int getNeighboringBombs() {
+        return neighboringBombs;
+    }
 }
 
