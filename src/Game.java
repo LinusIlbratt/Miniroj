@@ -38,6 +38,29 @@ public class Game {
 
         }
     }
+    private void updateGameState(int row, int col) {
+        Cell currentCell = gameBoard.getCell(row, col);
 
- a
+        // 1. Check if the player hit a bomb
+        if (currentCell.getHasBomb()) {
+            gameState = "LOST";
+            return;
+        }
+
+        // 2. Check if all non-bomb cells have been revealed
+        int totalCells = gameBoard.getBoardSize() * gameBoard.getBoardSize();
+        int revealedCells = 0;
+        for (int i = 0; i < gameBoard.getBoardSize(); i++) {
+            for (int j = 0; j < gameBoard.getBoardSize(); j++) {
+                if (gameBoard.getCell(i, j).isRevealed()) {
+                    revealedCells++;
+                }
+            }
+        }
+
+        if (totalCells - revealedCells == gameBoard.getBombCount()) {
+            gameState = "WON";
+        }
+    }
+
 }
