@@ -6,7 +6,6 @@ public class Cell {
     public Cell(){
         // Attributes already have their standard values.
     }
-
     public boolean hasBomb() {
         return hasBomb;
     }
@@ -31,6 +30,9 @@ public class Cell {
         this.neighboringBombs = neighboringBombs;
     }
 
+    public boolean getHasBomb() {
+        return false;
+    }
     @Override
     public String toString() {
         if (isRevealed) {
@@ -44,33 +46,5 @@ public class Cell {
         }
     }
 
-
-    public void setHasBomb(boolean hasBomb) {
-        this.hasBomb = hasBomb;
-    }
-
-
-    public boolean getHasBomb() {
-        return hasBomb;
-    }
-
-
-    public boolean isRevealed() {
-        return isRevealed;
-
-    }
-
-    public void setRevealed(boolean revealed) {
-
-        isRevealed = revealed;
-    }
-
-    public boolean hasBomb() {
-        return hasBomb;
-    }
-
-    public int getNeighboringBombs() {
-        return neighboringBombs;
-    }
 }
 
