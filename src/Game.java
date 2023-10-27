@@ -17,9 +17,9 @@ public class Game {
         this.player = new Player(playerName);
 
     }
-
     public void startGame() {
         System.out.println("welcome to minesweeper");
+        gameBoard.generateBombs();
         while (gameState.equals("RUNNING")) {
             gameBoard.displayGameBoard();
             System.out.println(player.getName() + " enter your move (Exemple A5)");
@@ -29,7 +29,8 @@ public class Game {
             int row = safeMove.charAt(0) - 'A';
             int col = Integer.parseInt(safeMove.substring(1)) - 1;
             gameBoard.revealCell(row, col);
-            updateGameState(row, col);
+
+
         }
         if (gameState.equals("Win")) {
             System.out.println("You Won the game :star_struck: ");

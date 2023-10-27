@@ -33,6 +33,7 @@ public class Cell {
     public boolean getHasBomb() {
         return false;
     }
+
     @Override
     public String toString() {
         if (isRevealed) {
