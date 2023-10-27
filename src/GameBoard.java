@@ -20,6 +20,7 @@ public class GameBoard {
             gameBoard.add(innerBox);
         }
 
+
     }
     public Cell getCell(int row, int col){
         ArrayList<Cell> getRow = gameBoard.get(row);
@@ -31,6 +32,20 @@ public class GameBoard {
 
     private void placeBomb(int row, int col) {
         gameBoard.get(row).get(col).setHasBomb(true);
+
+        // Update neighboring bomb counts for the 8 surrounding cells
+        int[] directionRow = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] directionCol = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+        for (int i = 0; i < 8; i++) {
+            int newRow = row + directionRow[i];
+            int newCol = col + directionCol[i];
+            // Check boundary conditions
+            if (newRow >= 0 && newRow < boardSize && newCol >= 0 && newCol < boardSize) {
+                Cell neighborCell = gameBoard.get(newRow).get(newCol);
+                neighborCell.setNeighboringBombs(neighborCell.getNeighboringBombs() + 1);
+            }
+        }
     }
     public void generateBombs() {
         Random rand = new Random();
@@ -81,18 +96,20 @@ public class GameBoard {
 
         // If the cell has a bomb, then it's a loss
         if (cell.hasBomb()){
-           // TODO This code will run if it has a bomb, implement a method for game over
-            System.out.println("Game over!");
+            // TODO This code will run if it has a bomb, implement a method for game over
+            revealAllBombs();
             return;
         }
+    }
 
-        // If the cell doesn't have any neighboring bombs, reveal neighboring cells
-        if (cell.getNeighboringBombs() == 0) {
-            // 8 possible directions for neighboring cells
-            int[] directionRow = {-1, -1, -1, 0, 0, 1, 1, 1};
-            int[] directionCol = {-1, 0, 1, -1, 1, -1, 0, 1};
-            for (int i = 0; i < 8; i++){
-                revealCell(row + directionRow[i], col + directionCol[i]);
+
+    private void revealAllBombs() {
+        for (int i = 0; i < boardSize; i++){
+            for (int j = 0; j < boardSize; j++){
+                Cell cell = gameBoard.get(i).get(j);
+                if (cell.hasBomb()) {
+                    cell.setRevealed(true);
+                }
             }
         }
     }
