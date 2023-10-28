@@ -6,10 +6,11 @@ public class Game {
     private Scanner scan;
     private Player player; // player is a reference of the Player class
     private String gameState;
-    private String playerName;
+    private GameTimer gameTimer;
 
     public Game() {
         scan = new Scanner(System.in);
+        gameTimer = new GameTimer();
         gameBoard = new GameBoard(8, 10); // 8x8 with 10 bombs
         gameState = "RUNNING";
         System.out.println("Enter your name: ");
@@ -20,6 +21,8 @@ public class Game {
     public void startGame() {
         System.out.println("welcome to minesweeper");
         gameBoard.generateBombs();
+        gameTimer.startTime();
+
         while (gameState.equals("RUNNING")) {
             gameBoard.displayGameBoard();
             System.out.println(player.getName() + " enter your move (Exemple A5)");
@@ -33,9 +36,13 @@ public class Game {
 
         }
         if (gameState.equals("Win")) {
+            gameTimer.stopTime();
             System.out.println("You Won the game :star_struck: ");
+            System.out.println("Elapsed Time: " + gameTimer.elapsedTime());
         } else if (gameState.equals("lost")) {
+            gameTimer.stopTime();
             System.out.println("GAME OVER :cry:");
+            System.out.println("Elapsed Time: " + gameTimer.elapsedTime());
 
         }
     }
