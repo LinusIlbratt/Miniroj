@@ -3,9 +3,10 @@ import java.util.Scanner;
 
 public class Game {
     private GameBoard gameBoard; // gameBoard is a reference of the GameBoard class
+    private String gameState;
     private Scanner scan;
     private Player player; // player is a reference of the Player class
-    private String gameState;
+
     private String playerName;
 
     public Game() {
@@ -26,25 +27,29 @@ public class Game {
             String safeMove = scan.nextLine().toUpperCase();
 
             // converting safeMove to row and col
-            int row = safeMove.charAt(0) - 'A';
-            int col = Integer.parseInt(safeMove.substring(1)) - 1;
-            gameBoard.revealCell(row, col);
+            int rowRad = safeMove.charAt(0) - 'A';
+            int colKol = Integer.parseInt(safeMove.substring(1)) - 1;
+            gameBoard.revealCell(rowRad, colKol);
+            updateGameState(rowRad,colKol);
 
 
         }
-        if (gameState.equals("Win")) {
-            System.out.println("You Won the game :star_struck: ");
-        } else if (gameState.equals("lost")) {
-            System.out.println("GAME OVER :cry:");
-
+        if (gameState.equals("LOST")){
+            System.out.println( player.getName() + ": Game over");
+            gameBoard.displayGameBoard();
+        } else if (gameState.equals("WON")) {
+            System.out.println( player.getName() + ": YOU WON THE GAME");
+            gameBoard.displayGameBoard();
         }
+
     }
     private void updateGameState(int row, int col) {
         Cell currentCell = gameBoard.getCell(row, col);
 
         // 1. Check if the player hit a bomb
-        if (currentCell.getHasBomb()) {
+        if (currentCell.hasBomb()) {
             gameState = "LOST";
+            currentCell.setRevealed(true);
             return;
         }
 
