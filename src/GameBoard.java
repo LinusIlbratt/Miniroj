@@ -88,6 +88,7 @@ public class GameBoard {
 
         // If the cell is already revealed then we return true
         if (cell.isRevealed()) {
+            System.out.println(" Denna ruta är redan öppen! Försök igen. 😊");
             return;
         }
 

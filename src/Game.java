@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+    private String reset ;
     private GameBoard gameBoard; // gameBoard is a reference of the GameBoard class
     private String gameState;
     private Scanner scan;
@@ -13,35 +14,53 @@ public class Game {
         scan = new Scanner(System.in);
         gameBoard = new GameBoard(8, 10); // 8x8 with 10 bombs
         gameState = "RUNNING";
-        System.out.println("Enter your name: ");
+
+                System.out.println("Enter your name: ");
         String playerName = scan.nextLine();
         this.player = new Player(playerName);
 
     }
     public void startGame() {
+
         System.out.println("welcome to minesweeper");
         gameBoard.generateBombs();
         while (gameState.equals("RUNNING")) {
             gameBoard.displayGameBoard();
             System.out.println(player.getName() + " enter your move (Exemple A5)");
             String safeMove = scan.nextLine().toUpperCase();
-
-            // converting safeMove to row and col
-            int rowRad = safeMove.charAt(0) - 'A';
-            int colKol = Integer.parseInt(safeMove.substring(1)) - 1;
-            gameBoard.revealCell(rowRad, colKol);
-            updateGameState(rowRad,colKol);
-
+            if (check(safeMove)){
+                try {     // converting safeMove to row and col
+                    int rowRad = safeMove.charAt(0) - 'A';
+                    int colKol = Integer.parseInt(safeMove.substring(1)) - 1;
+                    gameBoard.revealCell(rowRad, colKol);
+                    updateGameState(rowRad,colKol);
+                }catch (NumberFormatException e) {
+                    System.out.println("Oj då! Kom ihåg att skriva in ditt drag i formatet 'bokstav+siffra', till exempel 'a4'.");
+                }
+            } else {
+                System.out.println("Oj då! Kom ihåg att skriva in ditt drag i formatet 'bokstav+siffra', till exempel 'a4'.");
+            }
 
         }
         if (gameState.equals("LOST")){
             System.out.println( player.getName() + ": Game over");
             gameBoard.displayGameBoard();
+
         } else if (gameState.equals("WON")) {
             System.out.println( player.getName() + ": YOU WON THE GAME");
             gameBoard.displayGameBoard();
         }
 
+    }
+
+
+
+
+    public boolean check(String input) {
+        if (Character.isLetter(input.charAt(0)) && Character.isDigit(input.charAt(1))) {
+            return true;
+        }
+        return false;
     }
     private void updateGameState(int row, int col) {
         Cell currentCell = gameBoard.getCell(row, col);
