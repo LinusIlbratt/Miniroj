@@ -114,6 +114,17 @@ public class GameBoard {
             }
         }
     }
+    public void resetBoard() {
+        for (ArrayList<Cell> row : gameBoard) {
+            for (Cell cell : row) {
+                // Återställ cellen till dess ursprungliga tillstånd
+                cell.setHasBomb(false);
+                cell.setRevealed(false);
+                cell.setNeighboringBombs(0);
+            }
+        }
+        generateBombs();
+    }
 
     public void displayGameBoard(){    
 
