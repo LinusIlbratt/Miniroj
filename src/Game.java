@@ -13,10 +13,18 @@ public class Game {
         gameTimer = new GameTimer();
         gameBoard = new GameBoard(8, 10); // 8x8 with 10 bombs
         gameState = "RUNNING";
-        System.out.println("Enter your name: ");
-        String playerName = scan.nextLine();
-        this.player = new Player(playerName);
 
+        while (true) {
+            System.out.println("Enter your name: ");
+            String playerName = scan.nextLine();
+            if (player.isValidName()) {
+                this.player = new Player(playerName);
+                System.out.println("Name set to " + playerName);
+                break;
+            } else {
+                System.out.println("This is not a valid name, please select another one.");
+            }
+        }
     }
     public void startGame() {
         System.out.println("welcome to minesweeper");
