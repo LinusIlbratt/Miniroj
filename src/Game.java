@@ -34,6 +34,7 @@ public class Game {
     public void startGame() {
         System.out.println("Welcome to Minesweeper!");
         String gameReset = "yes";
+        gameTimer.startTime();
 
         while (gameReset.equalsIgnoreCase("yes")) {
             gameBoard.resetBoard();
@@ -89,13 +90,15 @@ public class Game {
             }
 
             if (gameState.equals("WON")) {
-                System.out.println(player.getName() + ": YOU WON THE GAME");
+                gameTimer.stopTime();
                 gameBoard.displayGameBoard();
-                return; // Avslutar gameLoop
+                System.out.println("It took you: " + gameTimer.elapsedTime() + " to win the game!");
+                return; // Ends the game loop
             } else if (gameState.equals("LOST")) {
-                System.out.println(player.getName() + ": Game over");
+                gameTimer.stopTime();
                 gameBoard.displayGameBoard();
-                return; // Avslutar gameLoop
+                System.out.println("Game Over! You played for : " + gameTimer.elapsedTime());
+                return; // Ends the game loop
             }
         }
     }
