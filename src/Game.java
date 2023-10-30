@@ -17,17 +17,17 @@ public class Game {
         gameState = "RUNNING";
 
 
-        System.out.println("Enter your name: ");
-        String playerName = scan.nextLine();
-        this.player = new Player(playerName);
-
+        this.player = new Player("Default name");
 
 
         while (true) {
             System.out.println("Enter your name: ");
             String playerName = scan.nextLine();
-            if (player.isValidName()) {                
-                System.out.println("Name set to " + playerName);
+
+            this.player.setName(playerName);
+
+            if (player.isValidName()) {
+                System.out.println("Name of the player is: " + playerName);
                 break;
             } else {
                 System.out.println("This is not a valid name, please select another one.");
