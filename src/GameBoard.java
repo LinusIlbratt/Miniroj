@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameBoard {
-     protected Cell cell;
-    Random bombsOnBoard = new Random();
     private int boardSize;
     private ArrayList<ArrayList<Cell>> gameBoard;
     private int bombCount;
@@ -29,7 +27,6 @@ public class GameBoard {
 
 
     }
-
     private void placeBomb(int row, int col) {
         gameBoard.get(row).get(col).setHasBomb(true);
 
@@ -46,6 +43,29 @@ public class GameBoard {
                 neighborCell.setNeighboringBombs(neighborCell.getNeighboringBombs() + 1);
             }
         }
+    }
+    public void placeFlag(int row, int col) {
+        if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) {
+            System.out.println("Invalid coordinates.");
+            return;
+        }
+
+        Cell cell = gameBoard.get(row).get(col);
+        if(cell.isRevealed()) {
+            System.out.println("Cannot place a flag on a revealed cell.");
+            return;
+        }
+
+        if (cell.hasFlag()) {
+            cell.setFlag(false);
+            System.out.println("Flag removed.");
+        } else {
+            cell.setFlag(true);
+            System.out.println("Flag placed.");
+        }
+    }
+    public boolean isFlagged(int row, int col) {
+        return gameBoard.get(row).get(col).hasFlag();
     }
     public void generateBombs() {
         Random rand = new Random();
@@ -65,19 +85,9 @@ public class GameBoard {
     public int getBoardSize() {
         return boardSize;
     }
-
-    public void setBoardSize(int boardSize) {
-        this.boardSize = boardSize;
-    }
-
     public int getBombCount() {
         return bombCount;
     }
-
-    public void setBombCount(int bombCount) {
-        this.bombCount = bombCount;
-    }
-
     public void revealCell(int row, int col){
         // Check if the index is valid
         if (row < 0 || row >= boardSize || col < 0 || col >= boardSize){
@@ -102,8 +112,6 @@ public class GameBoard {
             return;
         }
     }
-
-
     private void revealAllBombs() {
         for (int i = 0; i < boardSize; i++){
             for (int j = 0; j < boardSize; j++){
@@ -125,7 +133,6 @@ public class GameBoard {
         }
         generateBombs();
     }
-
     public void displayGameBoard(){    
 
         // 1. Print column numbers
@@ -159,7 +166,5 @@ public class GameBoard {
         // Print the bottom edge frame of the board
         System.out.println("  +-------------------------------+");
     }
-
-
 
 }
