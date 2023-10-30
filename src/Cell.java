@@ -3,6 +3,7 @@ public class Cell {
     protected boolean isRevealed;
     private int neighboringBombs;
 
+    private boolean hasFlag;
     public Cell(){
         // Attributes already have their standard values.
     }
@@ -12,6 +13,13 @@ public class Cell {
 
     public void setHasBomb(boolean hasBomb) {
         this.hasBomb = hasBomb;
+    }
+
+    public boolean hasFlag() {
+        return hasFlag;
+    }
+    public void setFlag(boolean hasFlag) {
+        this.hasFlag = hasFlag;
     }
 
     public boolean isRevealed() {
@@ -36,6 +44,9 @@ public class Cell {
 
     @Override
     public String toString() {
+        if (hasFlag) {
+            return "F";
+        }
         if (isRevealed) {
             if (hasBomb) {
                 // Röd färg för bomber
