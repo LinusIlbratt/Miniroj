@@ -88,6 +88,7 @@ public class GameBoard {
 
         // If the cell is already revealed then we return true
         if (cell.isRevealed()) {
+            System.out.println(" Denna ruta är redan öppen! Försök igen. 😊");
             return;
         }
 
@@ -112,6 +113,17 @@ public class GameBoard {
                 }
             }
         }
+    }
+    public void resetBoard() {
+        for (ArrayList<Cell> row : gameBoard) {
+            for (Cell cell : row) {
+                // Återställ cellen till dess ursprungliga tillstånd
+                cell.setHasBomb(false);
+                cell.setRevealed(false);
+                cell.setNeighboringBombs(0);
+            }
+        }
+        generateBombs();
     }
 
     public void displayGameBoard(){    
