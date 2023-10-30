@@ -76,7 +76,7 @@ public class GameBoard {
             Cell selectedCell = gameBoard.get(randomRow).get(randomCol);
 
 
-            if (!selectedCell.getHasBomb()) {
+            if (!selectedCell.hasBomb()) {
                 placeBomb(randomRow, randomCol);
                 placedBombs++;
             }
@@ -96,20 +96,46 @@ public class GameBoard {
 
         Cell cell = gameBoard.get(row).get(col);
 
-        // If the cell is already revealed then we return true
+        // If the cell is already revealed print a message for the user
         if (cell.isRevealed()) {
-            System.out.println(" Denna ruta är redan öppen! Försök igen. 😊");
+            System.out.println("The cell is already revealed, try again. 😊");
             return;
         }
 
         // Reveal the cell
         cell.setRevealed(true);
 
-        // If the cell has a bomb, then it's a loss
+        // If the cell has a bomb, reveal all bombs
         if (cell.hasBomb()){
-            // TODO This code will run if it has a bomb, implement a method for game over
             revealAllBombs();
             return;
+        }
+
+        // If the number of adjacent-bomb is 0, reveal adjacent cells recursive
+        if (cell.getNeighboringBombs() == 0) {
+            revealAdjacentCells(row, col);
+        }
+    }
+
+    public void revealAdjacentCells(int row, int col) {
+        for (int directionX = -1; directionX <= 1; directionX++) {
+            for (int directionY = -1; directionY <= 1; directionY++) {
+                // Avoid revealing the cell again
+                if (directionX == 0 && directionY == 0) continue;
+
+                int newRow = row + directionX;
+                int newCol = col + directionY;
+
+                // Check the board boundaries
+                if (newRow >= 0 && newRow < boardSize && newCol >= 0 && newCol < boardSize) {
+                    Cell adjacantCell = gameBoard.get(newRow).get(newCol);
+
+                    // Reveal the cell recursively if it's not revealed, doesn't have a bomb or is flagged
+                    if (!adjacantCell.isRevealed() && !adjacantCell.hasBomb() && !adjacantCell.hasFlag()) {
+                        revealCell(newRow, newCol);
+                    }
+                }
+            }
         }
     }
     private void revealAllBombs() {
@@ -131,7 +157,6 @@ public class GameBoard {
                 cell.setNeighboringBombs(0);
             }
         }
-        generateBombs();
     }
     public void displayGameBoard(){    
 

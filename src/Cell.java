@@ -38,10 +38,6 @@ public class Cell {
         this.neighboringBombs = neighboringBombs;
     }
 
-    public boolean getHasBomb() {
-        return false;
-    }
-
     @Override
     public String toString() {
         if (hasFlag) {
