@@ -30,13 +30,9 @@ public class Player {
     }
 
     public boolean isValidName() {
-        // Use a regular expression to check if the name contains only letters
-        boolean valid = name.matches("^[a-zA-Z]+$");
+        // Returns true if the name contains letters only, otherwise false
+        return name.matches("^[a-zA-Z]+$");
 
-        if (!valid) {
-            System.out.println("The name is not okay. It should consist of letters only.");
-        }
-        return valid;
     }
 
 }
