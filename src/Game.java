@@ -2,22 +2,37 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    private GameBoard gameBoard; // gameBoard is a reference of the GameBoard class
-    private String gameState;
+    private GameBoard gameBoard; // gameBoard is a reference of the GameBoard class    
     private Scanner scan;
     private Player player; // player is a reference of the Player class
-
     private String playerName;
+    private String gameState;
+    private GameTimer gameTimer;
+
 
     public Game() {
         scan = new Scanner(System.in);
+        gameTimer = new GameTimer();
         gameBoard = new GameBoard(8, 10); // 8x8 with 10 bombs
         gameState = "RUNNING";
+
 
         System.out.println("Enter your name: ");
         String playerName = scan.nextLine();
         this.player = new Player(playerName);
 
+
+
+        while (true) {
+            System.out.println("Enter your name: ");
+            String playerName = scan.nextLine();
+            if (player.isValidName()) {                
+                System.out.println("Name set to " + playerName);
+                break;
+            } else {
+                System.out.println("This is not a valid name, please select another one.");
+            }
+        }
     }
 
     public void startGame() {
@@ -58,10 +73,8 @@ public class Game {
             }
 
         }
+
     }
-
-
-
 
     public boolean check(String input) {
         if (Character.isLetter(input.charAt(0)) && Character.isDigit(input.charAt(1))) {
