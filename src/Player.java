@@ -3,28 +3,28 @@ public class Player {
     private String name;
     private int score;
 
-    // Konstruktor för att skapa en ny spelare med namn
+    // Constructor
     public Player(String playerName) {
         name = playerName;
-        score = 0; // Initialisera poängen till 0 (eller ett annat lämpligt startvärde)
+        score = 0; // Initialize to 0
     }
 
-    // Getter för spelarens namn
+    // Getter player name
     public String getName() {
         return name;
     }
 
-    // Setter för spelarens namn
+    // Setter player name
     public void setName(String playerName) {
         name = playerName;
     }
 
-    // Getter för spelarens poäng
+    // Getter for player points
     public int getScore() {
         return score;
     }
 
-    // Setter för spelarens poäng
+    // Setter for player points
     public void setScore(int playerScore) {
         score = playerScore;
     }
