@@ -203,6 +203,4 @@ public class GameBoard {
         // Print the bottom edge frame of the board
         System.out.println(horizontalDivider);
     }
-
-
 }
