@@ -160,40 +160,47 @@ public class GameBoard {
         }
     }
     public void displayGameBoard() {
-        // 1. Print column numbers with uniform spacing
-        System.out.print("    "); // Initial spacing for alignment
-        for (int i = 1; i <= boardSize; i++) {
-            System.out.printf("%-3d ", i); // Adjust space for each column number
-        }
-        System.out.println();
-
-        // 2. Build and print the top frame of the board
-        System.out.print("  +");
+        // Dynamic divider based on boardSize
+        String horizontalDivider = "  +";
         for (int i = 0; i < boardSize; i++) {
-            System.out.print("---+"); // Each segment of the top frame
+            horizontalDivider += "----";
+        }
+        horizontalDivider += "+";
+
+        // 1. Print column numbers
+        System.out.print("    "); // Initial spacing
+        for (int i = 1; i <= boardSize; i++) {
+            if (i < 10) {
+                // Additional space for single-digit numbers for alignment
+                System.out.print(" " + i + "  ");
+            } else {
+                System.out.print(i + "  ");
+            }
         }
         System.out.println();
 
-        // 3. Print rows of the board
+        // 2. Print the top edge frame of the board
+        System.out.println(horizontalDivider);
+
+        // 3. Print rows
         for (int row = 0; row < boardSize; row++) {
             // Print row letter
             char rowLetter = (char) ('A' + row);
-            System.out.print(rowLetter + " ");
+            System.out.print(rowLetter + " |");
 
-            // Print cells and dividers within the row
+            // Print cells
             for (int col = 0; col < boardSize; col++) {
-                System.out.print("| " + gameBoard.get(row).get(col).toString() + " ");
-            }
-            System.out.println("|");
-
-            // Print horizontal dividers between rows
-            System.out.print("  +");
-            for (int i = 0; i < boardSize; i++) {
-                System.out.print("---+"); // Divider segment for each cell
+                System.out.print(" " + gameBoard.get(row).get(col).toString() + " |");
             }
             System.out.println();
+
+            // Print horizontal divider after each row except the last one
+            if (row < boardSize - 1) {
+                System.out.println(horizontalDivider);
+            }
         }
+
+        // Print the bottom edge frame of the board
+        System.out.println(horizontalDivider);
     }
-
-
 }
