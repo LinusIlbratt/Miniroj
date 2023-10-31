@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -7,10 +6,10 @@ public class Game {
     private Player player; // player is a reference of the Player class
     private String gameState;
     private GameTimer gameTimer;
-    public Game() {
+    public Game(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
         scan = new Scanner(System.in);
         gameTimer = new GameTimer();
-        gameBoard = new GameBoard(8, 10); // 8x8 with 10 bombs
         gameState = "RUNNING";
 
 
@@ -31,12 +30,12 @@ public class Game {
             }
         }
     }
-    public void startGame() {
+    public boolean startGame() {
         System.out.println("Welcome to Minesweeper!");
         String gameReset = "yes";
         gameTimer.startTime();
 
-        while (gameReset.equalsIgnoreCase("yes")) {
+        do {
             gameBoard.resetBoard();
             gameBoard.generateBombs();
             gameState = "RUNNING";
@@ -45,8 +44,11 @@ public class Game {
 
             System.out.println("Do you want to play again? (Yes/No)");
             gameReset = scan.nextLine().toLowerCase();
-        }
+        } while (gameReset.equals("yes"));
+
+        return false;
     }
+
     private void gameLoop() {
         while (gameState.equals("RUNNING")) {
             gameBoard.displayGameBoard();

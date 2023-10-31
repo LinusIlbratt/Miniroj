@@ -2,58 +2,74 @@ import java.util.Scanner;
 
 public class Main {
 
-    static Scanner s;
+    private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-
-        int num;
-        do {
-            System.out.println("Welcome to Game Menu\n"
-                    + "1.Play\n"
-                    + "2.Exit\n");
-            s = new Scanner(System.in);
-            num = s.nextInt();
+        while (true) {
+            System.out.println("Welcome to Minesweeper\n"
+                    + "1. New Game\n"
+                    + "2. Highscore\n"
+                    + "3. Exit");
+            String input = scan.nextLine();
+            int num;
+            try {
+                num = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please enter a number.");
+                continue;
+            }
 
             switch (num) {
                 case 1:
-                    play();
+                    selectDifficulty();
                     break;
                 case 2:
-                    exit();
+                    // Enter highscore
+                case 3:
+                    System.exit(0);
                     break;
                 default:
+                    System.out.println("Invalid choice. Please try again.");
                     break;
             }
         }
-        while (num != 0);
     }
 
-    private static void play() {
-        int num;
-        do {
+    private static void selectDifficulty() {
+        boolean continuePlaying = true;
+        while (continuePlaying) {
             System.out.println("Which level do you want to play?");
             System.out.println("1. Easy");
-            System.out.println("2. Difficult");
-            s = new Scanner(System.in);
-            num = s.nextInt();
+            System.out.println("2. Medium");
+            System.out.println("3. Hard");
 
+            String input = scan.nextLine();
+            int num;
+            try {
+                num = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice. Please enter a number.");
+                continue;
+            }
+
+            GameBoard gameBoard;
             switch (num) {
                 case 1:
-                    System.out.println("You choosed easy");
-                    Game miniroj = new Game();
-                    miniroj.startGame();
+                    gameBoard = new GameBoard(5, 5); // Easy Settings
                     break;
                 case 2:
-                    System.out.println("You choosed difficult");
+                    gameBoard = new GameBoard(8, 10); // Medium Settings
                     break;
-                default:  System.out.println("Wrong input, try again");
+                case 3:
+                    gameBoard = new GameBoard(12, 25); // Hard Settings
                     break;
+                default:
+                    System.out.println("Wrong input, try again");
+                    continue;
             }
+            Game game = new Game(gameBoard);
+            continuePlaying = game.startGame();
         }
-        while (num != 0);
+    }
 
-    }
-    private static void exit() {
-    }
 }
-
