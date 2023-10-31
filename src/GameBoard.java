@@ -143,6 +143,7 @@ public class GameBoard {
             for (int j = 0; j < boardSize; j++){
                 Cell cell = gameBoard.get(i).get(j);
                 if (cell.hasBomb()) {
+                    cell.setFlag(false);
                     cell.setRevealed(true);
                 }
             }
@@ -151,7 +152,7 @@ public class GameBoard {
     public void resetBoard() {
         for (ArrayList<Cell> row : gameBoard) {
             for (Cell cell : row) {
-                // Återställ cellen till dess ursprungliga tillstånd
+                // Resetting cell to its original state
                 cell.setHasBomb(false);
                 cell.setRevealed(false);
                 cell.setNeighboringBombs(0);
