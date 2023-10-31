@@ -6,7 +6,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
         int num;
         do {
             System.out.println("Welcome to Game Menu\n"
@@ -57,3 +56,4 @@ public class Main {
     private static void exit() {
     }
 }
+
