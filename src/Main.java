@@ -1,39 +1,30 @@
 import java.util.Scanner;
 
 public class Main {
-
+    private static final String RED = "\u001B[31m";
+    public static final String RESET = "\u001B[0m";
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true) {
-            String menuTitelText = """                                  
-                         __  __ _           \s  ____\s
-                        |  \\/  (_)_ __   ___\s / ___|_      _____  ___ _ __   ___ _ __
-                        | |\\/| | | '_ \\ / _ \\ \\___ \\ \\ /\\ / / _ \\/ _ \\ '_ \\ / _ \\ '__|
-                        | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |\s
-                        |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|
-                                                                     |_|
-                    """;
+            System.out.print(RED+ """
 
-            String[] lines = menuTitelText.split("\n");
-            int maxLength = 0;
-            for (String line : lines) {
-                if (line.length() > maxLength) {
-                    maxLength = line.length();
-                }
-            }
+                     +------------------------------------------------------------------------------------------+\s
+                     |                __  __ _              ____                                                |\s
+                     |               |  \\/  (_)_ __   ___  / ___|_      _____  ___ _ __   ___ _ __              |\s
+                     |               | |\\/| | | '_ \\ / _ \\ \\___ \\  \\ _ / / _ \\/ _ \\ '_ \\ / _ \\ '__|             |\s
+                     |               | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |                |\s
+                     |               |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|                |\s
+                     |                                                            |_|                           |\s
+                     +------------------------------------------------------------------------------------------+\s
+                    """ + RESET);
+            
 
-            String horizontalBorder = "+" + "-".repeat(maxLength + 2) + "+";
-            System.out.println(horizontalBorder);
-            for (String line : lines) {
-                System.out.printf("| %-" + maxLength + "s |\n", line);
-            }
-            System.out.println(horizontalBorder);
-
-            System.out.println("Welcome! Make your choice: \n"
-                    + "1. New Game\n"
-                    + "2. Read rules\n"
-                    + "3. Exit");
+            System.out.println("""
+                    Welcome! Make your choice:\s
+                    1. New Game
+                    2. Read rules
+                    3. Exit""");
             System.out.print("> ");
             String input = scan.nextLine();
             int num;
