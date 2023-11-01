@@ -87,6 +87,7 @@ public class Main {
             System.out.println("1. Easy");
             System.out.println("2. Medium");
             System.out.println("3. Hard");
+            System.out.print("> ");
 
             String input = scan.nextLine();
             int num;
