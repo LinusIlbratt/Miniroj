@@ -6,10 +6,35 @@ public class Main {
 
     public static void main(String[] args) {
         while (true) {
-            System.out.println("Welcome to Minesweeper\n"
+            String menuTitelText = """                                  
+                         __  __ _           \s  ____\s
+                        |  \\/  (_)_ __   ___\s / ___|_      _____  ___ _ __   ___ _ __
+                        | |\\/| | | '_ \\ / _ \\ \\___ \\ \\ /\\ / / _ \\/ _ \\ '_ \\ / _ \\ '__|
+                        | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |\s
+                        |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|
+                                                                     |_|
+                    """;
+
+            String[] lines = menuTitelText.split("\n");
+            int maxLength = 0;
+            for (String line : lines) {
+                if (line.length() > maxLength) {
+                    maxLength = line.length();
+                }
+            }
+
+            String horizontalBorder = "+" + "-".repeat(maxLength + 2) + "+";
+            System.out.println(horizontalBorder);
+            for (String line : lines) {
+                System.out.printf("| %-" + maxLength + "s |\n", line);
+            }
+            System.out.println(horizontalBorder);
+
+            System.out.println("Welcome! Make your choice: \n"
                     + "1. New Game\n"
-                    + "2. Highscore\n"
+                    + "2. Read rules\n"
                     + "3. Exit");
+            System.out.print("> ");
             String input = scan.nextLine();
             int num;
             try {
