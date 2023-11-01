@@ -3,23 +3,15 @@ import java.util.Scanner;
 public class Main {
     private static final String RED = "\u001B[31m";
     public static final String RESET = "\u001B[0m";
+
+    public static final String ORANGE = "\u001B[38;5;208m";
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (true) {
-          
-            System.out.print(RED+ """
 
-                     +------------------------------------------------------------------------------------------+\s
-                     |                __  __ _              ____                                                |\s
-                     |               |  \\/  (_)_ __   ___  / ___|_      _____  ___ _ __   ___ _ __              |\s
-                     |               | |\\/| | | '_ \\ / _ \\ \\___ \\  \\ _ / / _ \\/ _ \\ '_ \\ / _ \\ '__|             |\s
-                     |               | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |                |\s
-                     |               |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|                |\s
-                     |                                                            |_|                           |\s
-                     +------------------------------------------------------------------------------------------+\s
-                    """ + RESET);
-            
+        printWithDelay(titleMessage(), 8);
+
+        while (true) {
 
             System.out.println("""
                     Welcome! Make your choice:\s
@@ -42,7 +34,9 @@ public class Main {
                     selectDifficulty();
                     break;
                 case 2:
-                    rules();
+                    ruleTitle();
+                    printWithDelay(ruleText(), 8);
+                    promptAnyKey();
                     break;
                 case 3:
                     System.exit(0);
@@ -54,14 +48,8 @@ public class Main {
         }
     }
 
-    private static void rules() {
-        String rulesText = """
-                                                       ____         _          \s
-                                                      |  _  \\_    _| | ___    ___\s
-                                                      | |_) | |  | | |/ _ \\ / __|
-                                                      |  _ <| |_ | | |  __/\\\\__ \\
-                                                      |_| \\_\\ \\__,_|_|\\___| |___/
-
+    private static String ruleText() {
+        return ORANGE + """
                 Your goal: Safely clear the field without triggering any mines.
                             
                 - Open a cell by typing its coordinate, like A1. Numbers in a cell shows the count of mines around the cell.
@@ -71,26 +59,24 @@ public class Main {
                             
 
                 Win by opening all safe cells. Good luck, and be careful!
+                """ + RESET;
+
+    }
+
+    private static void ruleTitle() {
+        System.out.println( ORANGE + """
+                                                       ____         _          \s
+                                                      |  _  \\_    _| | ___    ___\s
+                                                      | |_) | |  | | |/ _ \\ / __|
+                                                      |  _ <| |_ | | |  __/\\\\__ \\
+                                                      |_| \\_\\ \\__,_|_|\\___| |___/              
                 
-                """;
+                """ + RESET);
+    }
 
-      String[] lines = rulesText.split("\n");
-      int maxLength = 0;
-      for (String line : lines) {
-          if (line.length() > maxLength) {
-              maxLength = line.length();
-          }
-      }
-
-      String horizontalBorder = "+" + "-".repeat(maxLength + 2) + "+";
-        System.out.println(horizontalBorder);
-        for (String line : lines) {
-            System.out.printf("| %-" + maxLength + "s |\n", line);
-        }
-
-        System.out.println(horizontalBorder);
-
-        System.out.print("Hit any key to get back\n");
+    private static void promptAnyKey(){
+        System.out.println("\nPress any key to get back....");
+        Scanner scan = new Scanner(System.in);
         scan.nextLine();
     }
 
@@ -132,14 +118,28 @@ public class Main {
     }
 
 
-
-
-
-
-
-
-
-
-
-
+    public static String titleMessage() {
+        return RED+ """
+                     \s
+                                     __  __ _              ____\s
+                                    |  \\/  (_)_ __   ___  / ___|_      _____  ___ _ __   ___ _ __\s
+                                    | |\\/| | | '_ \\ / _ \\ \\___ \\  \\ _ / / _ \\/ _ \\ '_ \\ / _ \\ '__|\s
+                                    | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |\s
+                                    |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|\s
+                                                                                 |_|\s
+                     \s
+                    """ + RESET;
+    }
+    public static void printWithDelay(String message, long millisPerChar) {
+        for (char ch : message.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(millisPerChar);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Interrupted!");
+            }
+        }
+        System.out.println();
+    }
 }
