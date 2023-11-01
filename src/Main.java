@@ -9,10 +9,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        printWithDelay(titleMessage(), 8);
-
+        printWithDelayUpToDown(titleMessage(), 500);
         while (true) {
-
             System.out.println("""
                     Welcome! Make your choice:\s
                     1. New Game
@@ -35,7 +33,7 @@ public class Main {
                     break;
                 case 2:
                     ruleTitle();
-                    printWithDelay(ruleText(), 8);
+                    printWithDelayLeftToRight(ruleText(), 8);
                     promptAnyKey();
                     break;
                 case 3:
@@ -131,7 +129,7 @@ public class Main {
                      \s
                     """ + RESET;
     }
-    public static void printWithDelay(String message, long millisPerChar) {
+    public static void printWithDelayLeftToRight(String message, long millisPerChar) {
         for (char ch : message.toCharArray()) {
             System.out.print(ch);
             try {
@@ -142,5 +140,17 @@ public class Main {
             }
         }
         System.out.println();
+    }
+    public static void printWithDelayUpToDown(String message, long millisPerLine) {
+        String[] lines = message.split("\n");
+        for (String line : lines) {
+            System.out.println(line);
+            try {
+                Thread.sleep(millisPerLine);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Interrupted!");
+            }
+        }
     }
 }
