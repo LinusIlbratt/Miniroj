@@ -145,6 +145,7 @@ public class GameBoard {
                 if (cell.hasBomb()) {
                     cell.setFlag(false);
                     cell.setRevealed(true);
+
                 }
             }
         }
@@ -156,6 +157,8 @@ public class GameBoard {
                 cell.setHasBomb(false);
                 cell.setRevealed(false);
                 cell.setNeighboringBombs(0);
+                cell.setFlag(false);
+
             }
         }
     }
