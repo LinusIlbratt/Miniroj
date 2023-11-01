@@ -117,7 +117,7 @@ public class GameBoard {
         }
     }
 
-    public void revealAdjacentCells(int row, int col) {
+    public void revealAdjacentCells(int row, int col) {//this methode is revealing the neighbor cells if the neighboring cell has a cell that got bomb
         for (int directionX = -1; directionX <= 1; directionX++) {
             for (int directionY = -1; directionY <= 1; directionY++) {
                 // Avoid revealing the cell again

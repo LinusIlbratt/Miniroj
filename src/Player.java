@@ -19,15 +19,7 @@ public class Player {
         name = playerName;
     }
 
-    // Getter for player points
-    public int getScore() {
-        return score;
-    }
 
-    // Setter for player points
-    public void setScore(int playerScore) {
-        score = playerScore;
-    }
 
     public boolean isValidName() {
         // Returns true if the name contains letters only, otherwise false
