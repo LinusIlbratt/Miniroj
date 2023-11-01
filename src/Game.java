@@ -35,7 +35,7 @@ public class Game {
         String gameReset = "yes";
         gameTimer.startTime();
 
-        do {
+        do { // Go through this code while the gamereset is equal yes
             gameBoard.resetBoard();
             gameBoard.generateBombs();
             gameState = "RUNNING";
@@ -46,7 +46,7 @@ public class Game {
             gameReset = scan.nextLine().toLowerCase();
         } while (gameReset.equals("yes"));
 
-        return false;
+        return false; // if the player answer No don't run the do-while loop
     }
 
     private void gameLoop() {
@@ -54,7 +54,7 @@ public class Game {
             gameBoard.displayGameBoard();
             System.out.println(player.getName() + ", enter your move (Example: A5 or A5F for flagging)");
 
-            try {
+            try { // this try-catch block is taking care the input of the player so the game don't crash if the player put wrong input
                 String safeMove = scan.nextLine().toUpperCase().trim();
 
                 if (safeMove.isEmpty()) {
@@ -104,7 +104,7 @@ public class Game {
             }
         }
     }
-    public boolean check(String input) {
+    public boolean check(String input) { // this method check the input of the player is letter+number format
         return Character.isLetter(input.charAt(0)) && Character.isDigit(input.charAt(1));
     }
     private void updateGameState(int row, int col) {

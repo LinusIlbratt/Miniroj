@@ -45,19 +45,19 @@ public class Cell {
         }
         if (isRevealed) {
             if (hasBomb) {
-                // Röd färg för bomber
+                // Red color for the bomb
                 return "\u001B[31mB\u001B[0m";
             } else {
-                // Färgkod för siffrorna beroende på antalet grannbomber
+                // color for the number 0-3 and Bomb(B)
                 String color;
                 if (neighboringBombs == 0) {
-                    color = "\u001B[0m"; // Vit färg för noll
+                    color = "\u001B[0m"; // the color of zero is white
                 } else if (neighboringBombs == 1) {
-                    color = "\u001B[34m"; // Blå färg för ett
+                    color = "\u001B[34m"; // the color of the One is blue
                 } else if (neighboringBombs == 2) {
-                    color = "\u001B[32m"; // Grön färg för två
+                    color = "\u001B[32m"; // the color of the Two is green
                 } else {
-                    color = "\u001B[33m"; // Gul färg för andra siffror
+                    color = "\u001B[33m"; // Yellow color for other numbers
                 }
                 return color + neighboringBombs + "\u001B[0m";
             }
