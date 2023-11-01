@@ -6,20 +6,10 @@ public class Main {
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
-        while (true) {
-          
-            System.out.print(RED+ """
 
-                     +------------------------------------------------------------------------------------------+\s
-                     |                __  __ _              ____                                                |\s
-                     |               |  \\/  (_)_ __   ___  / ___|_      _____  ___ _ __   ___ _ __              |\s
-                     |               | |\\/| | | '_ \\ / _ \\ \\___ \\  \\ _ / / _ \\/ _ \\ '_ \\ / _ \\ '__|             |\s
-                     |               | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |                |\s
-                     |               |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|                |\s
-                     |                                                            |_|                           |\s
-                     +------------------------------------------------------------------------------------------+\s
-                    """ + RESET);
-            
+        printWithDelay(titleMessage(), 10);
+
+        while (true) {
 
             System.out.println("""
                     Welcome! Make your choice:\s
@@ -132,14 +122,28 @@ public class Main {
     }
 
 
-
-
-
-
-
-
-
-
-
-
+    public static String titleMessage() {
+        return RED+ """
+                     \s
+                                     __  __ _              ____\s
+                                    |  \\/  (_)_ __   ___  / ___|_      _____  ___ _ __   ___ _ __\s
+                                    | |\\/| | | '_ \\ / _ \\ \\___ \\  \\ _ / / _ \\/ _ \\ '_ \\ / _ \\ '__|\s
+                                    | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |\s
+                                    |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|\s
+                                                                                 |_|\s
+                     \s
+                    """ + RESET;
+    }
+    public static void printWithDelay(String message, long millisPerChar) {
+        for (char ch : message.toCharArray()) {
+            System.out.print(ch);
+            try {
+                Thread.sleep(millisPerChar);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Interrupted!");
+            }
+        }
+        System.out.println();
+    }
 }
