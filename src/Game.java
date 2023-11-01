@@ -18,6 +18,7 @@ public class Game {
 
         while (true) {
             System.out.println("Enter your name: ");
+            System.out.print("> ");
             String playerName = scan.nextLine();
 
             this.player.setName(playerName);
@@ -43,6 +44,7 @@ public class Game {
             gameLoop(); // Run the game loop
 
             System.out.println("Do you want to play again? (Yes/No)");
+            System.out.print("> ");
             gameReset = scan.nextLine().toLowerCase();
         } while (gameReset.equals("yes"));
 
@@ -53,6 +55,7 @@ public class Game {
         while (gameState.equals("RUNNING")) {
             gameBoard.displayGameBoard();
             System.out.println(player.getName() + ", enter your move (Example: A5 or A5F for flagging)");
+            System.out.print("> ");
 
             try { // this try-catch block is taking care the input of the player so the game don't crash if the player put wrong input
                 String safeMove = scan.nextLine().toUpperCase().trim();
