@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         while (true) {
+          
             System.out.print(RED+ """
 
                      +------------------------------------------------------------------------------------------+\s
@@ -26,6 +27,7 @@ public class Main {
                     2. Read rules
                     3. Exit""");
             System.out.print("> ");
+                               
             String input = scan.nextLine();
             int num;
             try {
@@ -40,7 +42,8 @@ public class Main {
                     selectDifficulty();
                     break;
                 case 2:
-                    // Enter highscore
+                    rules();
+                    break;
                 case 3:
                     System.exit(0);
                     break;
@@ -49,6 +52,46 @@ public class Main {
                     break;
             }
         }
+    }
+
+    private static void rules() {
+        String rulesText = """
+                                                       ____         _          \s
+                                                      |  _  \\_    _| | ___    ___\s
+                                                      | |_) | |  | | |/ _ \\ / __|
+                                                      |  _ <| |_ | | |  __/\\\\__ \\
+                                                      |_| \\_\\ \\__,_|_|\\___| |___/
+
+                Your goal: Safely clear the field without triggering any mines.
+                            
+                - Open a cell by typing its coordinate, like A1. Numbers in a cell shows the count of mines around the cell.
+                - Cells with no adjacent mines automatically reveal their neighboring cells.
+                - Mines can be in any of the 8 directions around a cell.
+                - Think there's a mine nearby? Flag it with an 'F' (e.g., A1F) to mark or unmark.
+                            
+
+                Win by opening all safe cells. Good luck, and be careful!
+                
+                """;
+
+      String[] lines = rulesText.split("\n");
+      int maxLength = 0;
+      for (String line : lines) {
+          if (line.length() > maxLength) {
+              maxLength = line.length();
+          }
+      }
+
+      String horizontalBorder = "+" + "-".repeat(maxLength + 2) + "+";
+        System.out.println(horizontalBorder);
+        for (String line : lines) {
+            System.out.printf("| %-" + maxLength + "s |\n", line);
+        }
+
+        System.out.println(horizontalBorder);
+
+        System.out.print("Hit any key to get back\n");
+        scan.nextLine();
     }
 
     private static void selectDifficulty() {
@@ -87,5 +130,16 @@ public class Main {
             continuePlaying = game.startGame();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 
 }
