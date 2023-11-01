@@ -1,15 +1,31 @@
 import java.util.Scanner;
 
 public class Main {
-
+    private static final String RED = "\u001B[31m";
+    public static final String RESET = "\u001B[0m";
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         while (true) {
-            System.out.println("Welcome to Minesweeper\n"
-                    + "1. New Game\n"
-                    + "2. Highscore\n"
-                    + "3. Exit");
+            System.out.print(RED+ """
+
+                     +------------------------------------------------------------------------------------------+\s
+                     |                __  __ _              ____                                                |\s
+                     |               |  \\/  (_)_ __   ___  / ___|_      _____  ___ _ __   ___ _ __              |\s
+                     |               | |\\/| | | '_ \\ / _ \\ \\___ \\  \\ _ / / _ \\/ _ \\ '_ \\ / _ \\ '__|             |\s
+                     |               | |  | | | | | |  __/  ___) \\ V  V /  __/  __/ |_) |  __/ |                |\s
+                     |               |_|  |_|_|_| |_|\\___| |____/ \\_/\\_/ \\___|\\___| .__/ \\___|_|                |\s
+                     |                                                            |_|                           |\s
+                     +------------------------------------------------------------------------------------------+\s
+                    """ + RESET);
+            
+
+            System.out.println("""
+                    Welcome! Make your choice:\s
+                    1. New Game
+                    2. Read rules
+                    3. Exit""");
+            System.out.print("> ");
             String input = scan.nextLine();
             int num;
             try {
